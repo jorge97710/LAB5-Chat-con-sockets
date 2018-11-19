@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html>
+<link rel="stylesheet" href="styles.css">
+<style>
+
+    #BoardInput {
+    padding:0px;
+    width:90%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :20px;
+}
+
+#Message {
+    padding:0px;
+    width:99%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    top :30px;
+}
+
+#Button {
+    padding:0px;
+    width:8%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :70px;
+    left: 1250px;
+}
+
+#Refresh {
+    padding:0px;
+    width:8%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :40px;
+    left: 1250px;
+}
+
+#chars {
+    padding:0px;
+    width:8%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :90px;
+    left: 1250px;
+}
+
+
+div {
+    width: 99%;
+    height: auto;
+    min-height: 150px;
+    max-height: 500px;
+    overflow: auto;
+    background-color: #2e88c4;
+    border: 1px solid #ccc;
+    overflow-x: hidden;
+  }
+
+  .thumbnail {
+    position: relative;
+    
+  }
+
+  .thumbnail:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .speech-bubble {
+	position: relative;
+	background: #dcf8c7;
+	border-radius: .4em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 65px solid transparent;
+	border-left-color: #dcf8c7;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: -32.5px;
+	margin-right: -65px;
+}
+
+
+/* ============================================================================================================================
+== BUBBLE WITH A RIGHT-ANGLED TRIANGLE
+** ============================================================================================================================ */
+
+/* THE SPEECH BUBBLE
+------------------------------------------------------------------------------------------------------------------------------- */
+
+.triangle-left {
+  position:relative;
+  padding:15px;
+  
+  background:#FEFFFD; /* default background for browsers without gradient support */
+  /* css3 */
+ margin-right: 40%;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  width: auto;
+}
+
+.triangle-left:after {
+  content:"";
+  position:absolute;
+  bottom:-20px; /* value = - border-top-width - border-bottom-width */
+  left:50px; /* controls horizontal position */
+  border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
+  border-style:solid;
+  border-color:#FEFFFD transparent;
+  /* reduce the damage in FF3.0 */
+  display:block;
+  width:0;
+}
+
+.triangle-left.left {
+  margin-left:40px;
+  background:#FEFFFD;
+}
+
+.triangle-left.left:after {
+  top:16px;
+  left:-40px; /* value = - border-left-width - border-right-width */
+  bottom:auto;
+  border-width:15px 40px 0 0; /* vary these values to change the angle of the vertex */
+  border-color:transparent #FEFFFD;
+}
+
+.triangle-right {
+  position:relative;
+  padding:15px;
+  margin-left: 40%;
+  background:#DCF8C7; /* default background for browsers without gradient support */
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  
+}
+
+/* Variant : for top positioned triangle
+------------------------------------------ */
+
+.triangle-right.top {
+  background:-webkit-gradient(linear, 0 0, 0 100%, from(#075698), to(#2e88c4));
+  background:-moz-linear-gradient(#075698, #2e88c4);
+  background:-o-linear-gradient(#075698, #2e88c4);
+  background:linear-gradient(#075698, #2e88c4);
+}
+
+/* Variant : for left positioned triangle
+------------------------------------------ */
+
+.triangle-right.left {
+  margin-left:40px;
+  background:#075698;
+}
+
+/* Variant : for right positioned triangle
+------------------------------------------ */
+
+.triangle-right.right {
+  margin-right:40px;
+  background:#DCF8C7;
+}
+
+/* THE TRIANGLE
+------------------------------------------------------------------------------------------------------------------------------- */
+
+.triangle-right:after {
+  content:"";
+  position:absolute;
+  bottom:-20px; /* value = - border-top-width - border-bottom-width */
+  left:50px; /* controls horizontal position */
+  border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
+  border-style:solid;
+  border-color:#DCF8C7 transparent;
+  /* reduce the damage in FF3.0 */
+  display:block;
+  width:0;
+}
+
+/* Variant : top
+------------------------------------------ */
+
+.triangle-right.top:after {
+  top:-20px; /* value = - border-top-width - border-bottom-width */
+  right:50px; /* controls horizontal position */
+  bottom:auto;
+  left:auto;
+  border-width:20px 20px 0 0; /* vary these values to change the angle of the vertex */
+  border-color:transparent #075698;
+}
+
+/* Variant : left
+------------------------------------------ */
+
+.triangle-right.left:after {
+  top:16px;
+  left:-40px; /* value = - border-left-width - border-right-width */
+  bottom:auto;
+  border-width:15px 40px 0 0; /* vary these values to change the angle of the vertex */
+  border-color:transparent #075698;
+}
+
+/* Variant : right
+------------------------------------------ */
+
+.triangle-right.right:after {
+  top:16px;
+  right:-40px; /* value = - border-left-width - border-right-width */
+  bottom:auto;
+  left:auto;
+  border-width:15px 0 0 40px; /* vary these values to change the angle of the vertex */
+  border-color:transparent #DCF8C7 ;
+}
+
+
+</style>
+
+<script type="text/javascript">
+    var id = prompt('Please enter your id');
+    var name = prompt('Please enter your name');
+
+</script>
+
+<form>
+    Laboratorio 4 (chat)<br>
+
+    <div id="Messages"></div>
+
+    <textarea id="BoardInput" name="Text1" cols="80" rows="8" placeholder="Type Message" maxlength="140" style="overflow:unset"></textarea>
+    <label id="chars">140</label>
+    <input id="Button" type="button" value="Submit" onclick=myFunction()>
+    <input id="Refresh" type="button" value="Refresh Chat" onclick=ref()>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        //console.log("aquiestoy");
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+
+        var input = document.getElementById("BoardInput");
+        input.addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("Button").click();
+                console.log("APACHARON ENTER");
+            } else {
+                var maxLength = 140;
+                //$('textarea').keyup(function() {
+                var length = document.getElementById("BoardInput").value.length
+                var length = maxLength - length;
+                console.log(length);
+                //$('#chars').text(length);
+                document.getElementById("chars").innerHTML = length + "/140";
+            }
+        });
+    </script>
+    <script>
+        //        ref();
+        //        function ref() {
+        console.log("Prueba del fetch");
+
+        //++++++++++++++++++++++++++++++PRUEBA CON SERVER
+        socket.on('recive message', function (msg) {
+            document.getElementById("Messages").innerHTML = "";
+            //$('#messages').append($('<li>').text(msg));
+            // console.log("ELLA" + msg + "\n");
+            socket.emit('recive message', "update");
+            //JSON.parse(msg);
+            for (var respuesta of msg) {
+                //console.log(respuesta.nick + " : " + respuesta.text);
+                if (respuesta.student_id == id) {
+
+                    document.getElementById("Messages").innerHTML = document.getElementById("Messages").innerHTML + "<br> <p class=\"triangle-right right\" align=\"right\">  " + respuesta.nick + " : " + respuesta.text + "</p>";
+
+                } else {
+
+                    document.getElementById("Messages").innerHTML = document.getElementById("Messages").innerHTML + "<br>  <p class=\"triangle-left left\" > " + respuesta.nick + " : " + respuesta.text + "</p>";
+                }
+                //===================================PRUEBA DETECCION
+                var x = respuesta.text;
+                var pruebaurl = 1;
+                var pruebaimage = 1;
+                if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(x)) {
+                    pruebaurl = 0;
+                    var URLInMessage = x.match(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"))[0];
+                    if (URLInMessage.match(/\.(jpeg|jpg|gif|png)$/)) {
+                        pruebaimage = 0;
+                        var URLOfImmage
+                        URLOfImmage = "Image from: (" + URLInMessage + ")";
+                        if (respuesta.student_id == id) {
+                            URLInMessage = URLOfImmage + "<br><img class=\"triangle-right right\"  src=\"" + URLInMessage + "\" width=\"500\" height=\"600\" >" + "<br> ";
+                        }
+                        else {
+                            URLInMessage = URLOfImmage + "<br><img class=\"triangle-left left\"  src=\"" + URLInMessage + "\" width=\"500\" height=\"600\" >" + "<br> ";
+
+                        }
+                    }
+
+
+
+                    if (pruebaimage == 1) {
+
+                        var yt = 0;
+                        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+                        var match = URLInMessage.match(regExp);
+                        if (match && match[2].length == 11) {
+                            yt = 1;
+                            // Do anything for being valid
+                            // if need to change the url to embed url then use below line
+                            // $('#ytplayerSide').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0');
+                            // alert("YT video found");
+                            if (respuesta.student_id == id) {
+
+                                URLInMessage = "<br>" + "<iframe  width=\"320\" height=\"210\" src=\"https://www.youtube.com/embed/" + match[2] + "\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>" + "<br>";
+                            } else {
+                                URLInMessage = "<br>" + "<iframe  width=\"320\" height=\"210\" src=\"https://www.youtube.com/embed/" + match[2] + "\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>" + "<br>";
+                            }
+
+                            /*
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YDepDMiP2GM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            */
+                        }
+                        if (yt == 0) {
+
+                            if (respuesta.student_id == id) {
+                                URLInMessage = "<br><img class=\"triangle-right right\" src=\"https://api.thumbnail.ws/api/ab68853ccc682951736e1ea2b65879b1a8889394624f/thumbnail/get?url=" + URLInMessage + "/&width=300\" style=\"width:300px;height:168px;\">";
+                            } else {
+                                URLInMessage = "<br><img class=\"triangle-left left\" src=\"https://api.thumbnail.ws/api/ab68853ccc682951736e1ea2b65879b1a8889394624f/thumbnail/get?url=" + URLInMessage + "/&width=300\" style=\"width:300px;height:168px;\">";
+
+                            }
+                        }
+                    }
+                }
+                //document.getElementById("Messages").innerHTML =;
+                if (pruebaurl == 0) {
+                    if (pruebaimage == 0) {
+                        document.getElementById("Messages").innerHTML = document.getElementById("Messages").innerHTML + "<br>" + "<br>" + "-----Detected Image-----" + URLInMessage + "" + "<br>";
+                    } else if (pruebaimage == 1) {
+                        document.getElementById("Messages").innerHTML = document.getElementById("Messages").innerHTML + "<br>" + "<br>" + "-----Detected URL-----" + URLInMessage + "" + "<br>";
+                    }
+                } else if (pruebaurl == 1) {
+                    //document.getElementById("Messages").innerHTML =document.getElementById("Messages").innerHTML+"<br>"+ name +" : "+ x ;
+                }
+                //document.getElementById("BoardInput").value ="";
+                //===================================PRUEBA DETECCION
+            }
+        });
+
+
+
+        //++++++++++++++++++++++++++++++PRUEBA CON SERVER
+
+        //----------------------------------------Prueba para el FETCH-----------------------------
+        /* const url = 'http://34.210.35.174:7000'; // Get 10 random users
+        document.getElementById("Messages").innerHTML = "";
+        fetch(url)
+            .then((resp) => resp.json()) // Transform the data into json
+            .then(resp => {
+                // Here you get the data to modify as you please
+                console.log(resp);
+                console.log("El tamanio es de :" + resp.length)
+                var lista = resp;
+                for (var respuesta of lista) {
+                    console.log(respuesta.nick + " : " + respuesta.text);
+                    document.getElementById("Messages").innerHTML = document.getElementById("Messages").innerHTML + "<br>" + respuesta.nick + " : " + respuesta.text + "<br>";
+                    //===================================PRUEBA DETECCION
+                    var x = respuesta.text;
+                    var pruebaurl = 1;
+                    var pruebaimage = 1;
+                    if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(x)) {
+                        pruebaurl = 0;
+                        var URLInMessage = x.match(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"))[0];
+                        if (URLInMessage.match(/\.(jpeg|jpg|gif|png)$/)) {
+                            pruebaimage = 0;
+                            var URLOfImmage
+                            URLOfImmage = "Image from: (" + URLInMessage + ")";
+                            URLInMessage = URLOfImmage + "<br><img  src=\"" + URLInMessage + "\" width=\"500\" height=\"600\" >" + "<br> ";
+                        }
+                        if (pruebaimage == 1) {
+                            URLInMessage = "<br><img src=\"https://api.thumbnail.ws/api/ab68853ccc682951736e1ea2b65879b1a8889394624f/thumbnail/get?url=" + URLInMessage + "/&width=300\" style=\"width:300px;height:168px;\">";
+                        }
+                    }
+                    //document.getElementById("Messages").innerHTML =;
+                    if (pruebaurl == 0) {
+                        if (pruebaimage == 0) {
+                            document.getElementById("Messages").innerHTML = document.getElementById("Messages").innerHTML + "<br>" + "<br>" + "-----Detected Image-----" + URLInMessage + "" + "<br>";
+                        } else if (pruebaimage == 1) {
+                            document.getElementById("Messages").innerHTML = document.getElementById("Messages").innerHTML + "<br>" + "<br>" + "-----Detected URL-----" + URLInMessage + "" + "<br>";
+                        }
+                    } else if (pruebaurl == 1) {
+                        //document.getElementById("Messages").innerHTML =document.getElementById("Messages").innerHTML+"<br>"+ name +" : "+ x ;
+                    }
+                    //document.getElementById("BoardInput").value ="";
+                    //===================================PRUEBA DETECCION
+                }
+                console.log("Entre al punto de modificar la data");
+            })
+
+            .catch(function (error) {
+                // If there is any error you will catch them here
+                console.log("Tiro algun error");
+            }); */
+        //----------------------------------------Prueba para el FETCH-----------------------------
+        //       }
+
+        //========================================FUNCION PARA ESCRIBIR LO QUE TENGO==============
+
+        function myFunction() {
+            var x = document.getElementById("BoardInput").value;
+            //++++++++++++++++++++++++++++++++++++++++++PRUEBA PARA EL POST CON FETC+++++++++++++++++++
+            console.log("LO QUE MANDA EL POST:");
+            var string = '{\"student_id\":\"' + id + '\","text\":\"' + x + '\",\"nick\":\"' + name + '\"' + '}';
+            // console.log(string);
+            console.log("lo que tiene de ultimo es: --" + x.slice(-1) + "--")
+            var result = x.slice(-1).localeCompare("\n");
+            if (result == 0) {
+                string = string.replace(/(\r\n\t|\n|\r\t)/gm, "");
+                console.log("EL NUEVO STRING");
+                console.log(string);
+                //console.log(JSON.parse( string));
+            } else {
+                console.log(string);
+                //console.log(JSON.parse( string));
+            }
+            //+++++++++++++++++++++++++++++++++MANDAR AL SERVIDOR+++++++++++++++++++++++++++++++++++++++++++++
+            socket.emit('send message', string);
+            //+++++++++++++++++++++++++++++++++MANDAR AL SERVIDOR+++++++++++++++++++++++++++++++++++++++++++++
+            //___________________________________________CODIGO PARA POST CON FETCH_____________________
+            // const urll = 'http://34.210.35.174:7000';
+            // //var url = 'https://example.com/profile';
+            // //var data = {username: 'example'}; esto sera el string
+            // Firm = new FormData();
+            // Firm.append("student_id",id);
+            // Firm.append("text",x);
+            // Firm.append("nick",name);
+            // fetch(urll, {
+            // method: 'POST', // or 'PUT'
+            // body: Firm // data can be `string` or {object}!  
+            // })
+            // .catch(error => console.error('Error:', error))
+            // .then(response => console.log('Success:', response));
+            // //___________________________________________CODIGO PARA POST CON FETCH_____________________
+            alert("Mensaje enviado");
+            // console.log(result) ;
+            // //++++++++++++++++++++++++++++++++++++++++++PRUEBA PARA EL POST CON FETC++++++++++++++++++++
+            document.getElementById("BoardInput").value = "";
+            //ref();
+        }
+        //========================================FUNCION PARA ESCRIBIR LO QUE TENGO==============
+    </script>
+
+
+</form>
+
+</html>

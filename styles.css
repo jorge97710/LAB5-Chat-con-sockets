@@ -1,0 +1,73 @@
+#BoardInput {
+    padding:0px;
+    width:90%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :20px;
+}
+
+#Message {
+    padding:0px;
+    width:99%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    top :30px;
+}
+
+#Button {
+    padding:0px;
+    width:8%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :70px;
+    left: 1250px;
+}
+
+#Refresh {
+    padding:0px;
+    width:8%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :40px;
+    left: 1250px;
+}
+
+#chars {
+    padding:0px;
+    width:8%;
+    
+    margin: 0 0 -8px -1px;
+    position: fixed ;
+    bottom :90px;
+    left: 1250px;
+}
+
+
+div {
+    width: 99%;
+    height: auto;
+    min-height: 150px;
+    max-height: 500px;
+    overflow: auto;
+    
+    border: 1px solid #ccc;
+  }
+
+  .thumbnail {
+    position: relative;
+    
+  }
+
+  .thumbnail:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
